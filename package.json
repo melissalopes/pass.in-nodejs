@@ -1,0 +1,23 @@
+{
+  "name": "api-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "start": "node ./dist/server.js"
+  },
+  "keywords": [],
+  "author": "Melissa Lopes Gouveia",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.3",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2"
+  }
+}
