@@ -28,7 +28,7 @@ app.post('/events', async (req, res) => {
         }
     });
 
-    return event;
+    return res.status(201).send(event);
 });
 
 app.listen({ port: ServerEnvs.PORT}).then(() => console.log('HTTP server running!'));
