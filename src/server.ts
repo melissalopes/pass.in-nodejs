@@ -4,14 +4,16 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod';
-import { createEvemt } from './routes/create-event';
+import { createEvent } from './routes/create-event';
+import { registerFprEvent } from './routes/register-for-event';
 
 const app = fastify();
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.register(createEvemt);
+app.register(createEvent);
+app.register(registerFprEvent);
 
 app
   .listen({ port: ServerEnvs.PORT })
