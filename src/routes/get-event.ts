@@ -11,11 +11,7 @@ export async function getEvent(app: FastifyInstance) {
         params: z.object({
           eventId: z.string().uuid(),
         }),
-        response: {
-          200: z.object({
-            eventId: z.string().uuid(),
-          }),
-        },
+        response: {},
       },
     },
     async (req, res) => {
@@ -27,7 +23,11 @@ export async function getEvent(app: FastifyInstance) {
         },
       });
 
-      return res.status(201).send({ eventId: event.id });
+      if (event !== null) {
+        throw new Error('Event not found!');
+      }
+
+      return res.status(200).send({ event });
     }
   );
 }
