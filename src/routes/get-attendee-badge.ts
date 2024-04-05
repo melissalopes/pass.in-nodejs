@@ -17,6 +17,20 @@ export async function getAttendeeBadge(app: FastifyInstance) {
     async (req, res) => {
       const { attendeeId } = req.params;
 
+      const attendee = await prisma.attendee.findUnique({
+        select: {
+            name: true,
+            email: true,
+        },
+        where: {
+            id: attendeeId
+        }
+      })
+
+      if (attendee === null) {
+        throw new Error('Attendee not found!');
+      }
+
       return res.status(200).send({ });
     }
   );
