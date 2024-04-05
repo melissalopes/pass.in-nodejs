@@ -1,8 +1,8 @@
 import fastify from 'fastify';
 import { ServerEnvs } from './config/envs';
 import {
-  serializerCompiler,
-  validatorCompiler,
+    serializerCompiler,
+    validatorCompiler,
 } from 'fastify-type-provider-zod';
 import { createEvent } from './routes/create-event';
 import { registerForEvent } from './routes/register-for-event';
@@ -19,6 +19,6 @@ app.register(registerForEvent);
 app.register(getEvent);
 app.register(getAttendeeBadge);
 
-app
-  .listen({ port: ServerEnvs.PORT })
-  .then(() => console.log('HTTP server running!'));
+app.listen({ port: ServerEnvs.PORT }).then(() =>
+    console.log('HTTP server running!')
+);

@@ -4,62 +4,62 @@ import { prisma } from '../lib/prisma';
 import { FastifyInstance } from 'fastify';
 
 export async function getEvent(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().get(
-    '/events/:eventId',
-    {
-      schema: {
-        params: z.object({
-          eventId: z.string().uuid(),
-        }),
-        response: {
-          200: z.object({
-            event: z.object({
-              id: z.string().uuid(),
-              title: z.string(),
-              slug: z.string(),
-              details: z.string().nullable(),
-              maximumAttendees: z.number().int().nullable(),
-              attendeesAmount: z.number().int(),
-            }),
-          }),
-        },
-      },
-    },
-    async (req, res) => {
-      const { eventId } = req.params;
-
-      const event = await prisma.event.findUnique({
-        select: {
-          id: true,
-          title: true,
-          slug: true,
-          details: true,
-          maximumAttendees: true,
-          _count: {
-            select: {
-              Attendee: true,
+    app.withTypeProvider<ZodTypeProvider>().get(
+        '/events/:eventId',
+        {
+            schema: {
+                params: z.object({
+                    eventId: z.string().uuid(),
+                }),
+                response: {
+                    200: z.object({
+                        event: z.object({
+                            id: z.string().uuid(),
+                            title: z.string(),
+                            slug: z.string(),
+                            details: z.string().nullable(),
+                            maximumAttendees: z.number().int().nullable(),
+                            attendeesAmount: z.number().int(),
+                        }),
+                    }),
+                },
             },
-          },
         },
-        where: {
-          id: eventId,
-        },
-      });
+        async (req, res) => {
+            const { eventId } = req.params;
 
-      if (event === null) {
-        throw new Error('Event not found!');
-      }
+            const event = await prisma.event.findUnique({
+                select: {
+                    id: true,
+                    title: true,
+                    slug: true,
+                    details: true,
+                    maximumAttendees: true,
+                    _count: {
+                        select: {
+                            Attendee: true,
+                        },
+                    },
+                },
+                where: {
+                    id: eventId,
+                },
+            });
 
-      return res.status(200).send({
-        event: {
-          id: event.id,
-          title: event.title,
-          slug: event.slug,
-          details: event.details,
-          maximumAttendees: event.maximumAttendees,
-          attendeesAmount: event._count.Attendee,
-        },
-      });
-    }
-  );
+            if (event === null) {
+                throw new Error('Event not found!');
+            }
+
+            return res.status(200).send({
+                event: {
+                    id: event.id,
+                    title: event.title,
+                    slug: event.slug,
+                    details: event.details,
+                    maximumAttendees: event.maximumAttendees,
+                    attendeesAmount: event._count.Attendee,
+                },
+            });
+        }
+    );
 }
