@@ -40,7 +40,7 @@ export async function getEvent(app: FastifyInstance) {
                     maximumAttendees: true,
                     _count: {
                         select: {
-                            Attendee: true,
+                            attendee: true,
                         },
                     },
                 },
@@ -60,7 +60,7 @@ export async function getEvent(app: FastifyInstance) {
                     slug: event.slug,
                     details: event.details,
                     maximumAttendees: event.maximumAttendees,
-                    attendeesAmount: event._count.Attendee,
+                    attendeesAmount: event._count.attendee,
                 },
             });
         }

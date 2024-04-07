@@ -46,7 +46,7 @@ export async function getEventAttendees(app: FastifyInstance) {
                     name: true,
                     email: true,
                     createdAt: true,
-                    CheckIn: {
+                    checkIn: {
                         select: {
                             createdAt: true,
                         },
@@ -76,7 +76,7 @@ export async function getEventAttendees(app: FastifyInstance) {
                         name: attendee.name,
                         email: attendee.email,
                         createdAt: attendee.createdAt,
-                        checkedInAt: attendee.CheckIn?.createdAt ?? null,
+                        checkedInAt: attendee.checkIn?.createdAt ?? null,
                     };
                 }),
             });
