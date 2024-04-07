@@ -1,0 +1,41 @@
+// is necessary to download 'REST Client' extension
+
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+    "title": "Unite summit",
+    "details": "Um evento para quem é apaixonado por programação!",
+    "maximumAttendees": 120
+}
+
+###
+
+// is necessary to get a valid eventId in prisma database
+// please execute on your terminal the command: "npx prisma db seed" to create a register
+// you can run on terminal "npx prisma studio" to see all registers
+POST http://localhost:3000/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees
+Content-Type: application/json
+
+{
+  "name": "Fulano Detal",
+  "email": "fulano@gmail.com.br"
+}
+
+###
+
+GET http://localhost:3000/events/9e9bd979-9d10-4915-b339-3786b1634f33
+
+###
+
+GET http://localhost:3000/attendees/1/badge
+
+###
+
+GET http://localhost:3000/attendees/1/check-in
+
+###
+
+GET http://localhost:3000/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees?query=Fulano
+
+###
