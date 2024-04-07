@@ -1,4 +1,10 @@
 // is necessary to download 'REST Client' extension
+// is necessary to follow the steps bellow:
+// 1. run on terminal the script "npm run db:migrate" to up migrations
+// 2. run on terminal the script "npm run db:seed" to create a register
+// tip: you can run on terminal "npm run db:studio" to see all registers
+
+###
 
 POST http://localhost:3000/events
 Content-Type: application/json
@@ -8,12 +14,10 @@ Content-Type: application/json
     "details": "Um evento para quem é apaixonado por programação!",
     "maximumAttendees": 120
 }
+// return an validation error
 
 ###
 
-// is necessary to get a valid eventId in prisma database
-// please execute on your terminal the command: "npx prisma db seed" to create a register
-// you can run on terminal "npx prisma studio" to see all registers
 POST http://localhost:3000/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees
 Content-Type: application/json
 
