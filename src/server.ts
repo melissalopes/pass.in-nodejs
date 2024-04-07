@@ -1,6 +1,7 @@
 import fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
+import fastifyCors from '@fastify/cors';
 import { ServerEnvs } from './config/envs';
 import {
     serializerCompiler,
@@ -17,6 +18,10 @@ import { getEventAttendees } from './routes/get-event-attendees';
 import { errorHandler } from './errors/error-handler';
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+app.register(fastifyCors, {
+    origin: '*',
+});
 
 app.register(fastifySwagger, {
     swagger: {
